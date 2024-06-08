@@ -1,6 +1,16 @@
 <div class="product p-3 size">
-  <img [src]="product.imageCover" class="w-100" [alt]="product.title">
-  <h3  >{{product.title | title}}</h3>
-  <h5 class="fs-6 text-muted">{{product.category.name}} </h5>
-  <p>{{product.price | currency:'EGP'}}  </p>
+  <div class="product-click" (click)="onClick()">
+    <img [src]="product.imageCover" class="w-100" [alt]="product.title">
+    <h3  >{{product.title | title}}</h3>
+    <h5 class="fs-6 text-muted">{{product.category.name}} </h5>
+    <div class="d-flex justify-content-between">
+
+      <p>{{product.price | currency:'EGP'}}  </p>
+      <p>
+        {{product.ratingsAverage}}
+        <i class="fa-solid fa-star rating-color ms-1"></i>
+      </p>
+    </div>
+  </div>
+  <button class="btn btn-product w-100 bg-main text-white">Add to Cart</button>
 </div>
