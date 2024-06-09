@@ -6,6 +6,8 @@ const routes: Routes = [
   {path : 'home' , loadChildren: ()=> import('../presenetation/pages/HomePage/HomePage.module').then(m=>m.HomePageModule)},
   {path : 'product-details/:productId' , loadChildren: ()=> import('../presenetation/pages/ProductDetailsPage/ProductDetailsPage.module').then(m=>m.ProductDetailsPageModule)},
   {path : 'whishlist' , loadChildren: ()=> import('../presenetation/pages/HomePage/HomePage.module').then(m=>m.HomePageModule)},
+  {path: 'login' , loadChildren : ()=> import('../presenetation/pages/Login/Login.module').then(m=>m.LoginModule)},
+  {path: 'signup' , loadChildren : ()=> import('../presenetation/pages/SignUp/SignUp.module').then(m=>m.SignUpModule)}
 ];
 
 @NgModule({

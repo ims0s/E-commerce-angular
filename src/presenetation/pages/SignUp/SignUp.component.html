@@ -1,3 +1,27 @@
-<p>
-  SignUp works!
-</p>
+<div class="mx-auto w-75 p-5">
+  <form [formGroup]="signUpForm"  (ngSubmit)="onSubmit();">
+
+    <label class="mt-2" for="name"> Name:</label>
+    <input   type="text" formControlName="name" id="name" placeholder="name" class="form-control mb-2 "/>
+    
+
+    <label class="mt-2" for="email"> Email:</label>
+    <input   type="email" formControlName="email" id="email" placeholder="Email" class="form-control mb-2" />
+    
+
+    <label class="mt-2" for="phone"> Phone:</label>
+    <input  type="tel" formControlName="phone" id="phone" placeholder="Phone" class="form-control mb-2"/>
+    
+
+    <label class="mt-2" for="password"> Password:</label>
+    <input   type="password" formControlName="password" id="password" placeholder="Password" class="form-control mb-2"/>
+    
+
+    <label class="mt-2" for="re-password"> Re Password:</label>
+    <input   type="password" formControlName="re-password" id="re-password" placeholder="Re Password" class="form-control mb-2"/>
+    
+    <div *ngIf="signUpForm?.errors?.['mismatch'] && signUpForm.touched" class="alert alert-danger">password must be match</div>
+
+    <button type="submit" [disabled]="signUpForm.invalid" class="btn bg-main text-white ms-auto mt-2"> Register</button>
+  </form>
+</div>
