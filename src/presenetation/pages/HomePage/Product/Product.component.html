@@ -1,5 +1,5 @@
 <div class="product p-3 rounded-3  overflow-hidden  ">
-  <div class="cursor-pointer" (click)="onClick()">
+  <div class="cursor-pointer" [routerLink]="['/product-details/'+product._id]">
     <img [src]="product.imageCover" class="w-100" [alt]="product.title">
     <p class="text-main">{{product.category.name}} </p>
     <h5 class="text-wrap w-100"  >{{product.title | title}}</h5>
