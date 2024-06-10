@@ -13,10 +13,16 @@
           <a class="nav-link " routerLinkActive="text-success" aria-current="page" routerLink="wishlist">wishlist</a>
         </li>
       </ul>
-      <div  >
+      <div *ngIf="!logged else loggedTemp "  >
         <a routerLink="login" class="text-decoration-none text-success px-3" >Login</a>
         <a routerLink="signup" class="text-decoration-none text-success px-3" >SignUp</a>
       </div>
     </div>
   </div>
 </nav>
+
+
+<ng-template #loggedTemp>
+  <p class="m-0">Hi {{loggedUser}}</p>
+  <p class="text-danger px-3 cursor-pointer m-0" (click)="logout();">Logout</p>
+</ng-template>

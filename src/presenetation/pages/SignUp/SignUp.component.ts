@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { errors } from 'src/core/constant/errors';
+import { Auth_dataSource } from 'src/data/datasource/remote_datasource_impl/Auth_datasource_imp';
+import { Signup_usecaseService } from 'src/domain/usecases/auth/signup_usecase.service';
 
 @Component({
   selector: 'app-SignUp',
@@ -9,9 +12,8 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
 export class SignUpComponent implements OnInit {
 
   signUpForm:FormGroup
-
-
-  constructor() { }
+  message:string|null
+  constructor(private signup_useCase$ : Signup_usecaseService) { }
 
   ngOnInit() {
 
@@ -20,7 +22,7 @@ export class SignUpComponent implements OnInit {
       'email': new FormControl(null , [Validators.required, Validators.email]),
       'phone': new FormControl(null,[Validators.pattern(/^01[0125][0-9]{8}$/gm),Validators.required]),
       'password': new FormControl(null,[Validators.required,Validators.pattern(/^(?=.*\d)[\s\S]{6,16}$/)]),
-      're-password': new FormControl(null,[Validators.required]),
+      'rePassword': new FormControl(null,[Validators.required]),
     }, {
       validators: this.passwordMatchValidator
     })
@@ -28,13 +30,22 @@ export class SignUpComponent implements OnInit {
   }
 
   passwordMatchValidator( control : AbstractControl){
-    return control.get("password")?.value=== control.get('re-password')?.value?null : {mismatch:true}
+    return control.get("password")?.value=== control.get('rePassword')?.value?null : {mismatch:true}
   }
 
   onSubmit(){
-    console.log(this.signUpForm)
+    if(this.signUpForm.valid){
+      this.signup_useCase$.execute(this.signUpForm.value).then().catch(error => this.message=error.error.message)
+    }
+    
+    
+
   }
 
+  errorMessage(type:string,error:string):string{
+    let message:string = errors[type][error]
+    return message
+  }
   
 
 }

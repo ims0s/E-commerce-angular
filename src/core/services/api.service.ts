@@ -19,21 +19,30 @@ export class ApiService extends ApiAbstract {
   
 	  }
 
-  	post(endpoint:string,body:any):Observable<any>{
-    	
-		return this.httpClient.get(this.baseUrl+endpoint)
+  	post(endpoint:string,body:any,):Observable<any>{
+		let token: string | null =window.localStorage.getItem("token")
+    	let header ={
+			headers:new HttpHeaders().set("token", token?token:"")
+		}
+		return this.httpClient.post(this.baseUrl+endpoint,body,header)
 
   	}
 
 	  put(endpoint:string,body:any):Observable<any>{
-    	
-		return this.httpClient.get(this.baseUrl+endpoint)
+    	let token: string | null =window.localStorage.getItem("token")
+    	let header ={
+			headers:new HttpHeaders().set("token", token?token:"")
+		}
+		return this.httpClient.put(this.baseUrl+endpoint,body,header)
 
   	}
 
 	  delete(endpoint:string):Observable<any>{
-    	
-		return this.httpClient.get(this.baseUrl+endpoint)
+    	let token: string | null =window.localStorage.getItem("token")
+    	let header ={
+			headers:new HttpHeaders().set("token", token?token:"")
+		}
+		return this.httpClient.delete(this.baseUrl+endpoint,header)
 
   	}
 

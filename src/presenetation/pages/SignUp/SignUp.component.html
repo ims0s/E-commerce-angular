@@ -3,25 +3,40 @@
 
     <label class="mt-2" for="name"> Name:</label>
     <input   type="text" formControlName="name" id="name" placeholder="name" class="form-control mb-2 "/>
+    <div *ngIf="signUpForm.get('name')?.touched">
+      <div class="text-danger" *ngFor="let error of (signUpForm.get('name')?.errors|keyvalue)">{{errorMessage("name",error.key)}}</div>
+    </div>
     
-
     <label class="mt-2" for="email"> Email:</label>
     <input   type="email" formControlName="email" id="email" placeholder="Email" class="form-control mb-2" />
-    
-
-    <label class="mt-2" for="phone"> Phone:</label>
-    <input  type="tel" formControlName="phone" id="phone" placeholder="Phone" class="form-control mb-2"/>
-    
-
-    <label class="mt-2" for="password"> Password:</label>
-    <input   type="password" formControlName="password" id="password" placeholder="Password" class="form-control mb-2"/>
-    
-
-    <label class="mt-2" for="re-password"> Re Password:</label>
-    <input   type="password" formControlName="re-password" id="re-password" placeholder="Re Password" class="form-control mb-2"/>
-    
-    <div *ngIf="signUpForm?.errors?.['mismatch'] && signUpForm.touched" class="alert alert-danger">password must be match</div>
-
-    <button type="submit" [disabled]="signUpForm.invalid" class="btn bg-main text-white ms-auto mt-2"> Register</button>
+      <div *ngIf="signUpForm.get('email')?.touched">
+        <div class="text-danger" *ngFor="let error of (signUpForm.get('email')?.errors|keyvalue)">{{errorMessage("email",error.key)}}</div>
+      </div>
+      
+      
+      <label class="mt-2" for="phone"> Phone:</label>
+      <input  type="tel" formControlName="phone" id="phone" placeholder="Phone" class="form-control mb-2"/>
+        <div *ngIf="signUpForm.get('phone')?.touched">
+          <div class="text-danger" *ngFor="let error of (signUpForm.get('phone')?.errors|keyvalue)">{{errorMessage("phone",error.key)}}</div>
+        </div>
+        
+        
+        <label class="mt-2" for="password"> Password:</label>
+        <input   type="password" formControlName="password" id="password" placeholder="Password" class="form-control mb-2"/>
+          <div *ngIf="signUpForm.get('password')?.touched">
+            <div class="text-danger" *ngFor="let error of (signUpForm.get('password')?.errors|keyvalue)">{{errorMessage("password",error.key)}}</div>
+          </div>
+          
+          
+          <label class="mt-2" for="rePassword"> Re Password:</label>
+          <input   type="password" formControlName="rePassword" id="rePassword" placeholder="Re Password" class="form-control mb-2"/>
+          
+          <div *ngIf="signUpForm?.errors?.['mismatch'] && signUpForm.get('rePassword')?.touched" class="text-danger">password must be match</div>
+          <div *ngIf="signUpForm.get('rePassword')?.touched">
+            <div class="text-danger" *ngFor="let error of (signUpForm.get('rePassword')?.errors|keyvalue)">{{errorMessage("rePassword",error.key)}}</div>
+          </div>
+          
+    <button type="submit" [disabled]="!signUpForm.valid" class="btn bg-main text-white ms-auto mt-2"> Register</button>
+    <div *ngIf="message" class="alert alert-danger mt-3">{{message}}</div>
   </form>
 </div>
