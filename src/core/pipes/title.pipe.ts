@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class TitlePipe implements PipeTransform {
 
   transform(title: string): string {
-    return title.split(' ').slice(0,2).toString();
+    return title.split(' ').slice(0,2).join(" ");
   }
 
 }

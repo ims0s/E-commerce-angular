@@ -1,0 +1,25 @@
+<div class="w-75 m-auto p-5">
+    <h2>Login now :</h2>
+
+    <form [formGroup]="signInForm" (submit)="onSubmit()" >
+
+
+        <label class="mt-2" for="email"> Email:</label>
+        <input (input)="onChange();"  type="email" formControlName="email" id="email" placeholder="Email" class="form-control mb-2"  />
+        <div *ngIf="signInForm.get('email')?.touched">
+            <div class="text-danger" *ngFor="let error of (signInForm.get('email')?.errors|keyvalue)">{{errorMessage("email",error.key)}}</div>
+        </div>
+
+
+        <label class="mt-2" for="password"> Password:</label>
+        <input (input)="onChange()"  type="password" formControlName="password" id="password" placeholder="Password" class="form-control mb-2"  />
+        <div *ngIf="signInForm.get('password')?.touched">
+            <div class="text-danger" *ngFor="let error of (signInForm.get('password')?.errors|keyvalue)">{{errorMessage("password",error.key)}}</div>
+        </div>
+
+
+        <button [disabled]="signInForm.invalid || this.message"  type="submit" class="btn bg-main text-white ms-auto mt-2"> Login </button>
+        <span class="text-danger mx-3">{{message}}</span>
+    </form>
+        
+</div>

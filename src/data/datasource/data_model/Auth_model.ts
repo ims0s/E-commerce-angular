@@ -5,6 +5,11 @@ export interface signUpFormModel{
     password:string,
 }
 
+export interface signInFormModel{
+    email:string,
+    password:string,
+}
+
 export interface signUpResponseModel{
     message:string,
     token:string,
@@ -16,3 +21,5 @@ export interface UserModel{
     name:string,
     role:string,
 }
+
+export interface signInResponseModel extends signUpResponseModel{}

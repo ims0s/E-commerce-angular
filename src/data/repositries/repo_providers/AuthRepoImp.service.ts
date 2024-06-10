@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IAuth_Repo } from '../repo_interfaces/IAuthRepo';
-import { signUpFormModel, signUpResponseModel } from 'src/data/datasource/data_model/Auth_model';
+import { signInFormModel, signInResponseModel, signUpFormModel, signUpResponseModel } from 'src/data/datasource/data_model/Auth_model';
 import { IAuthDataSource } from 'src/data/datasource/datasource_interface/IAuth_datasource';
 
 @Injectable({
@@ -14,6 +14,12 @@ constructor(private _remote_datasource : IAuthDataSource ) {
 
 override async signUp(body:signUpFormModel): Promise<signUpResponseModel> {
   let promise = await this._remote_datasource.signUp(body)
+  return promise
+}
+
+override async signIn(body: signInFormModel): Promise<signInResponseModel> {
+  let promise = await this._remote_datasource.signIn(body);
+
   return promise
 }
 
